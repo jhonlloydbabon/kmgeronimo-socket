@@ -19,7 +19,7 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
 
   socket.on("send_notification",async(data)=>{
-    const response = await axios.post(`https://kmgeronimo-backend-api.onrender.com/`,data);
+    const response = await axios.post(`https://kmgeronimo-backend-api.onrender.com/api/v1/notification`,data);
     socket.broadcast.emit("receive_notification", { value: response.data});
   })
 
