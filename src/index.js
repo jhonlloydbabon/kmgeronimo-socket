@@ -19,14 +19,16 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
 
   socket.on("send_notification",async(data)=>{
-    const response = await axios.post(`https://kmgeronimo-backend-api.onrender.com/api/v1/notification`,data);
+    // const response = await axios.post(`https://kmgeronimo-backend-api.onrender.com/api/v1/notification`,data);
+    const response = await axios.post(`http://localhost:8080/api/v1/notification/`,data);
     socket.broadcast.emit("receive_notification", { value: response.data});
   })
 
   //APPOINTMENT
   socket.on("appointment_admin_changes",(data)=>{
     socket.broadcast.emit("response_admin_changes",data);
-  })
+  });
+  
   socket.on("appointment_changes",(data)=>{
     socket.broadcast.emit("response_changes",data);
   })
@@ -40,7 +42,16 @@ io.on("connection", (socket) => {
   })
   socket.on("send_to_patient",data=>{
     socket.broadcast.emit("received_by_patient",data);
-  })
+  });
+
+   // PAYMENT
+  socket.on("payment_client_changes",(data)=>{
+    socket.broadcast.emit("response_payment_changes",data);
+  });
+
+  socket.on("payment_admin_changes",(data)=>{
+    socket.broadcast.emit("admin_response_payment_changes",data);
+  });
 
   socket.on("join_room", (key) => {
     socket.join(data);
