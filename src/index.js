@@ -11,13 +11,16 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000" || "exp://192.168.254.198:19000",
+    origin: "http://localhost:3000" || "exp://192.168.254.102:19000",
     methods: ["GET", "POST"],
   },
 });
 
 io.on("connection", (socket) => {
 
+  socket.on("test",(data)=>{
+    console.log(data);
+  })
   socket.on("send_notification",async(data)=>{
     // const response = await axios.post(`https://kmgeronimo-backend-api.onrender.com/api/v1/notification`,data);
     const response = await axios.post(`http://localhost:8080/api/v1/notification/`,data);
@@ -37,6 +40,9 @@ io.on("connection", (socket) => {
   })
 
   //MESSAGING 
+  socket.on("create_message_admin",data=>{
+    socket.broadcast.emit("create_received_by_patient",data);
+  })
   socket.on("send_to_admin",data=>{
     socket.broadcast.emit("received_by_admin",data);
   })
