@@ -34,9 +34,21 @@ io.on("connection", (socket) => {
   
   socket.on("appointment_changes",(data)=>{
     socket.broadcast.emit("response_changes",data);
-  })
+  });
+
+  socket.on("cancel_by_admin",(data)=>{
+    socket.broadcast.emit("response_cancel_by_admin",data);
+  });
+
+  socket.on("admin_appointment_create",(data)=>{
+    socket.broadcast.emit("response_admin_appointment_create",data);
+  });
+
   socket.on("cancel_appointment",(data)=>{
     socket.broadcast.emit("response_cancel",data);
+  })
+  socket.on("delete_appointment",(data)=>{
+    socket.broadcast.emit("response_delete",data);
   })
 
   //MESSAGING 
