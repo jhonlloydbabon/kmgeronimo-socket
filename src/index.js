@@ -21,13 +21,18 @@ io.on("connection", (socket) => {
   socket.on("test",(data)=>{
     console.log(data);
   })
-  socket.on("send_notification",async(data)=>{
-    // const response = await axios.post(`https://kmgeronimo-backend-api.onrender.com/api/v1/notification`,data);
-    const response = await axios.post(`http://localhost:8080/api/v1/notification/`,data);
-    socket.broadcast.emit("receive_notification", { value: response.data});
+  socket.on("send_notification",(data)=>{
+    socket.broadcast.emit("receive_notification", data);
+  })
+  socket.on("send_notification_by_admin",(data)=>{
+    socket.broadcast.emit("receive_notification_by_admin", data);
   })
 
   //APPOINTMENT
+  socket.on("new_appointment_patient_changes",(data)=>{
+    socket.broadcast.emit("new_response_patient_changes",data);
+  });
+
   socket.on("appointment_admin_changes",(data)=>{
     socket.broadcast.emit("response_admin_changes",data);
   });
