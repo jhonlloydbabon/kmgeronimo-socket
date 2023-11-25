@@ -17,10 +17,6 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-
-  socket.on("test",(data)=>{
-    console.log(data);
-  })
   socket.on("send_notification",(data)=>{
     socket.broadcast.emit("receive_notification", data);
   })
@@ -80,13 +76,10 @@ io.on("connection", (socket) => {
     socket.join(data);
   });
 
-//   socket.on("join_room", (data) => {
-//     socket.join(data);
-//   });
-
-//   socket.on("send_message", (data) => {
-//     socket.to(data.room).emit("receive_message", data);
-//   });
+  // APPOINTMENT FEE
+  socket.on("change_appointment_fee", data=>{
+    socket.broadcast.emit("response_appointment_fee", data)
+  })
 });
 
 server.listen(8081, () => {
