@@ -56,6 +56,9 @@ io.on("connection", (socket) => {
   socket.on("create_message_admin",data=>{
     socket.broadcast.emit("create_received_by_patient",data);
   })
+  socket.on("create_message_patient",data=>{
+    socket.broadcast.emit("create_received_by_admin",data);
+  })
   socket.on("send_to_admin",data=>{
     socket.broadcast.emit("received_by_admin",data);
   })
