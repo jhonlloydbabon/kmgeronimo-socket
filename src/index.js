@@ -11,7 +11,22 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000/" || "exp://192.168.254.100:19000" || "https://updated-km-frontend.vercel.app", 
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+
+      const allowedOrigins = [
+        "http://localhost:3000",
+        "exp://192.168.254.100:19000",
+        "https://updated-km-frontend.vercel.app",
+      ];
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST"],
   },
 });
