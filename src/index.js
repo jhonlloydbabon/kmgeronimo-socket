@@ -4,6 +4,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 const { default: axios } = require("axios");
+const PORT = 8081;
 
 app.use(cors());
 
@@ -12,6 +13,7 @@ const server = http.createServer(app);
 app.get('/',(req, res)=>{
   res.write("Check Mic"); 
 })
+
 const io = new Server(server, {
   cors: {
     origin: function (origin, callback) {
@@ -103,6 +105,6 @@ io.on("connection", (socket) => {
   })
 });
 
-server.listen(8081, () => {
+server.listen(PORT, () => {
   console.log("SERVER IS RUNNING");
 });
