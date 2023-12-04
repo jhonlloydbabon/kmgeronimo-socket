@@ -9,6 +9,9 @@ app.use(cors());
 
 const server = http.createServer(app);
 
+app.get('/',(req, res)=>{
+  res.write("Check Mic"); 
+})
 const io = new Server(server, {
   cors: {
     origin: function (origin, callback) {
