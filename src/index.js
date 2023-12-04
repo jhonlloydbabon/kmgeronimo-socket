@@ -4,7 +4,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 const { default: axios } = require("axios");
-const PORT = 8081;
+const PORT = process.env.PORT || 8081;
 
 app.use(cors());
 
