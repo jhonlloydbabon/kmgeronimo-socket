@@ -16,22 +16,7 @@ app.get('/',(req, res)=>{
 
 const io = new Server(server, {
   cors: {
-    origin: function (origin, callback) {
-      // Allow requests with no origin (like mobile apps or curl requests)
-      if (!origin) return callback(null, true);
-
-      const allowedOrigins = [
-        "http://localhost:3000",
-        "exp://192.168.254.100:19000",
-        "https://updated-km-frontend.vercel.app",
-      ];
-
-      if (allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: "http://localhost:3000" ||  "exp://192.168.254.100:19000" || "https://updated-km-frontend.vercel.app",
     methods: ["GET", "POST"],
   },
 });
@@ -106,5 +91,5 @@ io.on("connection", (socket) => {
 });
 
 server.listen(PORT, () => {
-  console.log("SERVER IS RUNNING");
+  console.log("SERVER IS RUNNING", PORT);
 });
