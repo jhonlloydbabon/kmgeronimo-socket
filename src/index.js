@@ -16,7 +16,7 @@ app.get('/',(req, res)=>{
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000" ||  "exp://192.168.254.100:19000" || "https://updated-km-frontend.vercel.app",
+    origin: "http://localhost:3000" ||  "exp://192.168.254.100:19000" || "https://www.km-geronimo.social/" || "com.jlbabon12.dentalclinicmobilefrontend" || "https://expo.dev//accounts/jlbabon12/projects/dental-clinic-mobile-frontend/builds/4e7043c5-ddd8-4ed9-987b-82edf91db694",
     methods: ["GET", "POST"],
   },
 });
