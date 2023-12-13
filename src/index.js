@@ -16,7 +16,7 @@ app.get('/',(req, res)=>{
 
 const io = new Server(server, {
   cors: {
-    origin: "exp://192.168.254.100:19000" || "https://www.km-geronimo.social/" || "com.jlbabon12.dentalclinicmobilefrontend",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
